@@ -15,13 +15,11 @@ class DetectController extends Controller
     	]);
     	$domain = $request->input('domain');    	
 		$domain = preg_replace('#^https?://#', '', $domain);
-    	echo "<h4>The domain </h4>";
-    	echo $domain;
     	$Parser = new WhoisParser('array'); 
     	$result = $Parser->lookup($domain);
-		//echo $result->created; // get create date of domain name
-		echo "<h4>Raw Data </h4>";
-		print_r($result); // get raw output as array
-    	// dd($request->input());
+    	
+		return view('result',compact('domain','result'));
+
+    	
     }
 }
