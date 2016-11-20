@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::post('/detect', 'DetectController@index');
+Route::get('/detect', function () {
+    return redirect('/');
+});
 
 Auth::routes();
 
