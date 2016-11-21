@@ -17,8 +17,8 @@ class DetectController extends Controller
 		$domain = preg_replace('#^https?://#', '', $domain);
     	$Parser = new WhoisParser('array'); 
     	$result = $Parser->lookup($domain);
-    	
-		return view('result',compact('domain','result'));
+    	$ipv4=gethostbynamel($domain);
+		return view('result',compact('domain','result','ipv4'));
 
     	
     }
