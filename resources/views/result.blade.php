@@ -17,19 +17,12 @@
                         </td>
                     </tr>
                 </table>
-            <h2>Whois Data</h2>
+            <h2>Whois Raw Data</h2>
+            <hr/>
+            <pre>
+                {{$result['rawdata'][0]}}
+            </pre>
             <table>
-                <tr>
-                    <td>Name</td>
-                    <td>{{$result['name']}}</td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>@foreach($result['status'] as $status)
-                        {{$status}}
-                        @endforeach
-                    </td>
-                </tr>
                 <tr>
                     <td>Nameserver</td>
                     <td>@foreach($result['nameserver'] as $nameserver)
@@ -37,18 +30,10 @@
                         @endforeach
                     </td>
                 </tr>
-                <tr>
-                    <td>IPS</td>
-                    <td>
-                                         
-                    </td>
-                </tr>
+               
             </table>
 
-            <hr/>
-            <pre>
-          <?php  print_r($result); ?>
-            </pre>
+            
         </div>
     </div>
 </div>
