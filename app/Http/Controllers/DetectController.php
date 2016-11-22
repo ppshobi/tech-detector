@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use Novutec\DomainParser\Parser as DomainParser;
 use Novutec\WhoisParser\Parser as WhoisParser;
+use Sunra\PhpSimple\HtmlDomParser;
 
 
 class DetectController extends Controller
@@ -18,7 +19,11 @@ class DetectController extends Controller
     	$Parser = new WhoisParser('array'); 
     	$result = $Parser->lookup($domain);
     	$ipv4=gethostbynamel($domain);
-		return view('result',compact('domain','result','ipv4'));
+
+        $dom = HtmlDomParser::str_get_html($domain);
+        dd($dom);
+		
+        return view('result',compact('domain','result','ipv4'));
 
     	
     }
