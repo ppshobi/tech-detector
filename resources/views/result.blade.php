@@ -29,10 +29,9 @@
                         {{$nameserver}}
                         @endforeach
                     </td>
-                </tr>
-               
+                </tr>               
             </table>
-
+            
             
         </div>
     </div>
