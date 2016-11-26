@@ -4,6 +4,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <h2>Dummy</h2>
+            <pre>
+               
+            </pre>
             <h2>The Requested Domain</h2>
             {{$domain}}
             <h2>Ip Address</h2>
@@ -18,6 +22,7 @@
                     </tr>
                 </table>
             <h2>Whois Raw Data</h2>
+           
             <hr/>
             <pre>
                 {{$result['rawdata'][0]}}

@@ -14,16 +14,21 @@ class DetectController extends Controller
     	$this->validate($request, [
         	'domain' => 'required|max:255|url',        
     	]);
-    	$domain = $request->input('domain');    	
-		$domain = preg_replace('#^https?://#', '', $domain);
+    	$raw_domain = $request->input('domain');    	
+		$domain = preg_replace('#^https?://#', '', $raw_domain);
     	$Parser = new WhoisParser('array'); 
     	$result = $Parser->lookup($domain);
     	$ipv4=gethostbynamel($domain);
 
-        $dom = HtmlDomParser::str_get_html($domain);
-        dd($dom);
-		
-        return view('result',compact('domain','result','ipv4'));
+        $cms=null;
+
+        $dom = HtmlDomParser::file_get_html($raw_domain);
+        foreach($dom->find('img') as $element) 
+            echo $element->src . '<br>';
+        
+       
+        
+        //return view('result',compact('domain','result','ipv4','dom'));
 
     	
     }
