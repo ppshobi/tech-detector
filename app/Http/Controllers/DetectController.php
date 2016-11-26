@@ -20,15 +20,27 @@ class DetectController extends Controller
     	$result = $Parser->lookup($domain);
     	$ipv4=gethostbynamel($domain);
 
-        $cms=null;
+        $technologies=[];
+
+        function wp_admin_url_exists($domain) {
+            $wp_url=$domain . "/wp-admin/";
+
+            if (!$fp = curl_init($wp_url)) 
+                return false;
+            return true;
+        }
+
+        if(wp_admin_url_exists($domain)){
+            $technologies['cms']="Wordpress";
+        }
 
         $dom = HtmlDomParser::file_get_html($raw_domain);
-        foreach($dom->find('img') as $element) 
-            echo $element->src . '<br>';
-        
+       // foreach($dom->find('img') as $element) 
+         //   echo $element->src . '<br>';
+
        
         
-        //return view('result',compact('domain','result','ipv4','dom'));
+        return view('result',compact('domain','result','ipv4','technologies'));
 
     	
     }

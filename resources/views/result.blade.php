@@ -11,7 +11,7 @@
             <h2>The Requested Domain</h2>
             {{$domain}}
             <h2>Ip Address</h2>
-                <table>
+                <table class="table">
                     <tr>
                         <td>IPV4</td>
                         <td>
@@ -27,7 +27,7 @@
             <pre>
                 {{$result['rawdata'][0]}}
             </pre>
-            <table>
+            <table class="table">
                 <tr>
                     <td>Nameserver</td>
                     <td>@foreach($result['nameserver'] as $nameserver)
@@ -35,6 +35,19 @@
                         @endforeach
                     </td>
                 </tr>               
+            </table>
+            <table class="table">
+                <tr>
+                    <td>Content Management System</td>
+                    <td>
+                        @if($technologies['cms'])
+                            {{ $technologies['cms'] }}
+                        @else
+                            "<b> CMS can't Be identified</b>"
+                        @endif
+
+                    </td>
+                </tr>
             </table>
             
             
