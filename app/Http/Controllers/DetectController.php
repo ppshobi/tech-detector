@@ -22,19 +22,31 @@ class DetectController extends Controller
 
         $technologies=[];
 
-        function wp_admin_url_exists($domain) {
-            $wp_url=$domain . "/wp-admin/";
+        function url_exists($url) {
+            $handle = curl_init($url);
+            curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
 
-            if (!$fp = curl_init($wp_url)) 
+            $response = curl_exec($handle);
+            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+
+            if($httpCode >= 200 && $httpCode <= 400) {
+                return true;
+            } else {
                 return false;
-            return true;
-        }
+            }
 
-        if(wp_admin_url_exists($domain)){
+            curl_close($handle);
+        }
+        $url=$domain;
+        $url=$url."/wp-admin";
+
+        if(url_exists($url)){
             $technologies['cms']="Wordpress";
+        }else{
+            $technologies['cms']="Unable to detect"
         }
 
-        $dom = HtmlDomParser::file_get_html($raw_domain);
+        //$dom = HtmlDomParser::file_get_html($raw_domain);
        // foreach($dom->find('img') as $element) 
          //   echo $element->src . '<br>';
 
