@@ -43,7 +43,7 @@ class DetectController extends Controller
         if(url_exists($url)){
             $technologies['cms']="Wordpress";
         }else{
-            $technologies['cms']="Unable to detect"
+            $technologies['cms']="Unable to detect";
         }
 
         //$dom = HtmlDomParser::file_get_html($raw_domain);

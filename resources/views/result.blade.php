@@ -15,8 +15,8 @@
                     <tr>
                         <td>IPV4</td>
                         <td>
-                            @foreach($ipv4 as $ip)
-                            {{$ip}}
+                            @foreach((array)$ipv4 as $ip)
+                            {{$ip}}<br/>
                             @endforeach
                         </td>
                     </tr>
@@ -30,8 +30,8 @@
             <table class="table">
                 <tr>
                     <td>Nameserver</td>
-                    <td>@foreach($result['nameserver'] as $nameserver)
-                        {{$nameserver}}
+                    <td>@foreach((array)$result['nameserver'] as $nameserver)
+                        {{$nameserver}}<br/>
                         @endforeach
                     </td>
                 </tr>               
