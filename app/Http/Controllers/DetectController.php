@@ -44,19 +44,24 @@ class DetectController extends Controller
         }else{
             $technologies['cms']="Unable to detect";
         }
-        
+        //server information
+        // =====================
+        $headers = get_headers($raw_domain,1);
+        dd($headers);
+        $server_info['server']=$headers['Server'];
+        $server_info['poweredby']=$headers['X-Powered-By'];
         //programming language
         if ($technologies['cms']=="Wordpress") {
             $technologies['programming_language']="PHP";
         }else{
-            $technologies['programming_language']="HTML"
+            $technologies['programming_language']="HTML";
         }
 
         //$dom = HtmlDomParser::file_get_html($raw_domain);
        // foreach($dom->find('img') as $element) 
          //   echo $element->src . '<br>';       
         
-        return view('result',compact('domain','result','ipv4','technologies'));
+        return view('result',compact('domain','result','server_info', 'ipv4','technologies'));
 
     	
     }
