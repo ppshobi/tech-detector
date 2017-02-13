@@ -54,7 +54,7 @@
                     <td>Server Information</td>
                     <td>
                         @if($server_info['server'])
-                            {{ current($server_info['server']) }}
+                            {{ $server_info['server'] }}
                         @else
                             "<b>Sever Info Was Not Avilable</b>"
                         @endif
@@ -68,7 +68,7 @@
                     </td>
                     <td>
                         @if($server_info['poweredby'])
-                            {{ current($server_info['poweredby']) }}
+                            {{ $server_info['poweredby'] }}
                         @else
                             "<b>Programming Language was Not detected</b>"
                         @endif

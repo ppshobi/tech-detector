@@ -39,16 +39,31 @@ class DetectController extends Controller
         $url=$domain;
         $url=$url."/wp-admin";
         //cms detection
+        // ==================
         if(url_exists($url)){
             $technologies['cms']="Wordpress";
         }else{
             $technologies['cms']="Unable to detect";
         }
+        
         //server information
         // =====================
         $headers = get_headers($raw_domain,1);
-        $server_info['server']=$headers['Server'];
-        $server_info['poweredby']=$headers['X-Powered-By'];
+       
+        
+        if (isset($headers['Server'])) {
+             $server_info['server']=$headers['Server'];
+        }else{
+            $server_info['server']='';
+        }
+
+        if (isset($headers['X-Powered-By'])) {
+            $server_info['poweredby']=$headers['X-Powered-By'];
+        }else{
+            $server_info['poweredby']='';
+        }
+        
+
         //programming language
         if ($technologies['cms']=="Wordpress") {
             $technologies['programming_language']="PHP";
