@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Novutec\WhoisParser\Parser as WhoisParser;
 use Sunra\PhpSimple\HtmlDomParser;
 
-
 class DetectController extends Controller
 {
     public function index(Request $request){
@@ -39,18 +38,23 @@ class DetectController extends Controller
         }
         $url=$domain;
         $url=$url."/wp-admin";
-
+        //cms detection
         if(url_exists($url)){
             $technologies['cms']="Wordpress";
         }else{
             $technologies['cms']="Unable to detect";
         }
+        
+        //programming language
+        if ($technologies['cms']=="Wordpress") {
+            $technologies['programming_language']="PHP";
+        }else{
+            $technologies['programming_language']="HTML"
+        }
 
         //$dom = HtmlDomParser::file_get_html($raw_domain);
        // foreach($dom->find('img') as $element) 
-         //   echo $element->src . '<br>';
-
-       
+         //   echo $element->src . '<br>';       
         
         return view('result',compact('domain','result','ipv4','technologies'));
 

@@ -43,7 +43,7 @@
                         @if($technologies['cms'])
                             {{ $technologies['cms'] }}
                         @else
-                            "<b> CMS can't Be identified</b>"
+                            "<b>HTML, XHTML</b>"
                         @endif
 
                     </td>
