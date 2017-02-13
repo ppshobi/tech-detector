@@ -47,7 +47,6 @@ class DetectController extends Controller
         //server information
         // =====================
         $headers = get_headers($raw_domain,1);
-        dd($headers);
         $server_info['server']=$headers['Server'];
         $server_info['poweredby']=$headers['X-Powered-By'];
         //programming language
