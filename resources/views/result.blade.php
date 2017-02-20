@@ -53,8 +53,11 @@
                 <tr>
                     <td>Server Information</td>
                     <td>
+                    
                         @if($server_info['server'])
-                            {{ $server_info['server'] }}
+                            @foreach((array)$server_info['server'] as $server)
+                                {{$server}}<br/>
+                            @endforeach
                         @else
                             "<b>Sever Info Was Not Avilable</b>"
                         @endif
