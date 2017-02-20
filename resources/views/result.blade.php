@@ -4,10 +4,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h2>Dummy</h2>
-            <pre>
-               
-            </pre>
             <h2>The Requested Domain</h2>
             {{$domain}}
             <h2>Ip Address</h2>
@@ -73,7 +69,7 @@
                         @if($server_info['poweredby'])
                             {{ $server_info['poweredby'] }}
                         @else
-                            "<b>Programming Language was Not detected</b>"
+                            "<b>Programming Language was Not detected from header</b>"
                         @endif
 
                     </td>
