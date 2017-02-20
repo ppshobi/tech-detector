@@ -69,7 +69,7 @@
                         @if($server_info['poweredby'])
                             {{ $server_info['poweredby'] }}
                         @else
-                            "<b>Programming Language was Not detected from header</b>"
+                            {{ $technologies['programming_language'] }}
                         @endif
 
                     </td>
