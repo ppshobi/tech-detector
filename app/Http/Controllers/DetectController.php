@@ -13,12 +13,12 @@ class DetectController extends Controller
     	$this->validate($request, [
         	'domain' => 'required|max:255|url',        
     	]);
-    	$raw_domain = $request->input('domain');    	
+    	$raw_domain = $request->input('domain');
 		$domain = preg_replace('#^https?://#', '', $raw_domain);
     	$Parser = new WhoisParser('array'); 
     	$result = $Parser->lookup($domain);
     	$ipv4=gethostbynamel($domain);
-
+        
         $technologies=[];
 
         function url_exists($url) {
@@ -40,7 +40,19 @@ class DetectController extends Controller
         $url=$url."/wp-admin";
         //cms detection
         // ==================
-        if(url_exists($url)){
+        function has_wp_content($raw_domain){
+            //finding an image url to see wp-content exists
+            $dom = HtmlDomParser::file_get_html($raw_domain);
+            $img_url = $dom->find('img',1)->src;
+            $img_url=(array)explode('/', $img_url); 
+            foreach ($img_url as $urls) {
+                if ($urls=="wp-content") {
+                    return true;
+                }
+            }
+            return false;   
+        }
+        if(url_exists($url) && has_wp_content($raw_domain)){
             $technologies['cms']="Wordpress";
         }else{
             $technologies['cms']="Unable to detect";
