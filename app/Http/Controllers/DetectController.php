@@ -21,7 +21,6 @@ class DetectController extends Controller
         
         $technologies=[];
         $meta_tags=get_meta_tags($raw_domain);
-
         //dd($meta_tags);
         function url_exists($url) {
             $handle = curl_init($url);
@@ -40,6 +39,15 @@ class DetectController extends Controller
         }
         $url=$domain;
         $url=$url."/wp-admin";
+        //version detection from string
+        function get_version($ver_string){
+            if (preg_match('/\d+(?:\.\d+)+/', $ver_string, $matches)) { 
+                return $matches[0]; //returning the first match 
+            }else{
+                return "Unknown";
+            }
+        }
+
         //cms detection
         // ==================
         function has_wp_content($raw_domain){
@@ -55,14 +63,21 @@ class DetectController extends Controller
             return false;   
         }
         if(url_exists($url) && has_wp_content($raw_domain)){
-            $cms="WordPress";
-            if (isset($meta_tags['generator'])) {
-                $cms = $meta_tags['generator'];
+            $cms=array('name'=>"Wordpress",'version'=>"Unknown");
+            if (isset($meta_tags['generator']) && preg_match("/^Wordpress/", $meta_tags['generator'])) {
+                $cms['version']=get_version($meta_tags['generator']);
             }
-
             $technologies['cms']=$cms;
-        }else{
-            $technologies['cms']="Unable to detect";
+
+        }elseif (isset($meta_tags['generator']) && preg_match("/^Drupal/", $meta_tags['generator'])) {
+                //drupal
+                $cms=array('name'=>"Drupal",'version'=>"Unknown");
+                $cms['version']=get_version($meta_tags['generator']);
+                $technologies['cms']=$cms;
+        }
+        else{
+            $cms = array('name' => "Unknown", 'version'=> "Unknown");
+            $technologies['cms']=$cms;
         }
         
         //server information
@@ -84,7 +99,7 @@ class DetectController extends Controller
         
 
         //programming language
-        if ($technologies['cms']=="Wordpress") {
+        if ($technologies['cms']=="Wordpress" || $technologies['cms']) {
             $technologies['programming_language']="PHP";
         }else{
             $technologies['programming_language']="HTML";
