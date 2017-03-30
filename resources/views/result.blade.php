@@ -6,33 +6,33 @@
         <div class="col-md-8 col-md-offset-2" id="print">
             <h2>The Requested Domain </h2>
             {{$domain}}
-            <h2>Ip Address</h2>
-                <table class="table">
-                    <tr>
-                        <td>IPV4</td>
-                        <td>
-                            @foreach((array)$ipv4 as $ip)
-                            {{$ip}}<br/>
-                            @endforeach
-                        </td>
-                    </tr>
-                </table>
             <h2>Whois Raw Data</h2>
-           
-            <hr/>
             <pre>
-                {{$result['rawdata'][0]}}
+                {{ $result['rawdata'][0] }}
             </pre>
             <table class="table">
                 <tr>
+                    <td>Ip Address</td>
+                    <td>
+                        @foreach((array)$ipv4 as $ip)
+                        {{$ip}}<br/>
+                        @endforeach
+                    </td>
+                </tr>
+                <tr>
+                   <td> 
+                         </td>
+                </tr>
+                <tr>
+                    
+                </tr>
+                <tr>
                     <td>Nameserver</td>
                     <td>@foreach((array)$result['nameserver'] as $nameserver)
-                        {{$nameserver}}<br/>
+                        {{ $nameserver }}<br/>
                         @endforeach
                     </td>
                 </tr>               
-            </table>
-            <table class="table">
                 <tr>
                     <td>Content Management System</td>
                     <td>
@@ -44,8 +44,6 @@
 
                     </td>
                 </tr>
-            </table>
-            <table class="table">
                 <tr>
                     <td>Server Information</td>
                     <td>
@@ -74,12 +72,14 @@
 
                     </td>
                 </tr>
-            </table>           
+            </table>    
+            <button id="report" class="btn btn-success pull-right">Print</button>       
         </div>
+
     </div>
 
 </div>
-<button id="report" class="btn btn-success pull-right">Print</button>
+
 
 @endsection
 
