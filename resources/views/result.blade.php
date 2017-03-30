@@ -10,7 +10,7 @@
             <table class="table">
                 <tr>
                     <td>
-                        <pre>
+                        <pre class="whois">
                             {{ $result['rawdata'][0] }}
                         </pre>
                     </td>
