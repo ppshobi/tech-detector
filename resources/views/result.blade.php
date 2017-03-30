@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2" id="print">
             <h2>The Requested Domain </h2>
-            {{$domain}}
+            <div class="domain">{{$domain}}</div>
             <h2>Whois Raw Data</h2>
             <pre>
                 {{ $result['rawdata'][0] }}
@@ -18,13 +18,6 @@
                         {{$ip}}<br/>
                         @endforeach
                     </td>
-                </tr>
-                <tr>
-                   <td> 
-                         </td>
-                </tr>
-                <tr>
-                    
                 </tr>
                 <tr>
                     <td>Nameserver</td>
@@ -72,8 +65,10 @@
 
                     </td>
                 </tr>
-            </table>    
-            <button id="report" class="btn btn-success pull-right">Print</button>       
+            </table>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <button id="report" class="btn btn-success pull-right">Print</button>  
         </div>
 
     </div>

@@ -87,7 +87,22 @@
     <script src="js/printThis.js"></script>
     <script type="text/javascript">
         $("#report").click(function(e){
-            $("#print").printThis();
+            var report_header = $('domain').html();
+            $("#print").printThis({
+                debug: true,               
+                importCSS: true,            
+                importStyle: true,        
+                printContainer: true,        
+                pageTitle: report_header,             
+                removeInline: false,       
+                printDelay: 333,            
+                header: report_header,               
+                footer: null,               
+                base: false,                 
+                formValues: true ,           
+                canvas: false               
+                    
+            });
         });
     </script>
 </body>
