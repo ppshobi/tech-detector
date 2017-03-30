@@ -8,7 +8,9 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <ul class="list-group">
+                        <a href="/"><li class="list-group-item"> Fingerprint new Website</li></a>
+                    </ul>
                 </div>
             </div>
         </div>

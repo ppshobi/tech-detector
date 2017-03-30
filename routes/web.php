@@ -23,3 +23,7 @@ Route::get('/detect', function () {
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
