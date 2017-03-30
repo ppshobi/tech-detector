@@ -19,6 +19,9 @@ Route::post('/detect', 'DetectController@index');
 Route::get('/detect', function () {
     return redirect('/');
 });
+Route::get('/print', function () {
+    return view('print');
+});
 
 Auth::routes();
 

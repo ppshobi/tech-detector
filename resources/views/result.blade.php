@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <h2>The Requested Domain</h2>
+        <div class="col-md-8 col-md-offset-2" id="print">
+            <h2>The Requested Domain </h2>
             {{$domain}}
             <h2>Ip Address</h2>
                 <table class="table">
@@ -74,10 +74,12 @@
 
                     </td>
                 </tr>
-            </table>
-            
-            
+            </table>           
         </div>
     </div>
+
 </div>
+<button id="report" class="btn btn-success pull-right">Print</button>
+
 @endsection
+
