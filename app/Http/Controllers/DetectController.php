@@ -109,11 +109,11 @@ class DetectController extends Controller
         }
 
         //$dom = HtmlDomParser::file_get_html($raw_domain);
-       // foreach($dom->find('img') as $element) 
-         //   echo $element->src . '<br>';       
+        // foreach($dom->find('img') as $element) 
+        //   echo $element->src . '<br>';       
         
-        return view('result',compact('domain','result','server_info', 'ipv4','technologies'));
 
+        return view('result',compact('domain','result','server_info', 'ipv4','technologies'));
     	
     }
 }
