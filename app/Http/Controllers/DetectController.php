@@ -20,7 +20,9 @@ class DetectController extends Controller
     	$ipv4=gethostbynamel($domain);
         
         $technologies=[];
+        $meta_tags=get_meta_tags($raw_domain);
 
+        //dd($meta_tags);
         function url_exists($url) {
             $handle = curl_init($url);
             curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
@@ -53,7 +55,12 @@ class DetectController extends Controller
             return false;   
         }
         if(url_exists($url) && has_wp_content($raw_domain)){
-            $technologies['cms']="Wordpress";
+            $cms="WordPress";
+            if (isset($meta_tags['generator'])) {
+                $cms = $meta_tags['generator'];
+            }
+
+            $technologies['cms']=$cms;
         }else{
             $technologies['cms']="Unable to detect";
         }
