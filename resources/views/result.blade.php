@@ -7,9 +7,16 @@
             <h2>The Requested Domain </h2>
             <div class="domain">{{$domain}}</div>
             <h2>Whois Raw Data</h2>
-            <pre>
-                {{ $result['rawdata'][0] }}
-            </pre>
+            <table class="table">
+                <tr>
+                    <td>
+                        <pre>
+                            {{ $result['rawdata'][0] }}
+                        </pre>
+                    </td>
+                </tr>
+            </table>
+            
             <table class="table">
                 <tr>
                     <td>Ip Address</td>
@@ -74,7 +81,6 @@
     </div>
 
 </div>
-
 
 @endsection
 
