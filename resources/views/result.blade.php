@@ -37,7 +37,7 @@
                     <td>Content Management System</td>
                     <td>
                         @if($technologies['cms'])
-                            {{ $technologies['cms'] }}
+                            {{ $technologies['cms']['name'] }} {{", version = " . $technologies['cms']['version'] }}
                         @else
                             "<b>HTML, XHTML</b>"
                         @endif
