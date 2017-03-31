@@ -1,8 +1,13 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UserSearch;
+use Auth;
+
+
 //use Novutec\DomainParser\Parser as DomainParser;
 use Novutec\WhoisParser\Parser as WhoisParser;
 use Sunra\PhpSimple\HtmlDomParser;
@@ -108,12 +113,21 @@ class DetectController extends Controller
             $technologies['programming_language']="HTML, Javascript, Css";
         }
 
-        //$dom = HtmlDomParser::file_get_html($raw_domain);
-        // foreach($dom->find('img') as $element) 
-        //   echo $element->src . '<br>';       
-        
 
+        function store($url){
+            if (Auth::check()){
+                //if user is logged in then store the url in db,
+                $search=new UserSearch();
+                $user_id=Auth::id();
+                $search->user_id=$user_id;
+                $search->url=$url;
+                $search->save();
+            }
+        }
+        store($raw_domain);
         return view('result',compact('domain','result','server_info', 'ipv4','technologies'));
     	
     }
+
+   
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\UserSearch;
+use Auth;
 
 class SearchController extends Controller
 {
@@ -12,6 +13,6 @@ class SearchController extends Controller
     	$recent_searches=UserSearch::all();
     	return view('recent_search',compact('recent_searches'));
     }
-
+    
 
 }
