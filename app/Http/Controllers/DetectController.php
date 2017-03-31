@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use App\UserSearch;
 use Auth;
 
-
 //use Novutec\DomainParser\Parser as DomainParser;
 use Novutec\WhoisParser\Parser as WhoisParser;
 use Sunra\PhpSimple\HtmlDomParser;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class DetectController extends Controller
 {
@@ -18,11 +19,20 @@ class DetectController extends Controller
     	$this->validate($request, [
         	'domain' => 'required|max:255|url',        
     	]);
+
     	$raw_domain = $request->input('domain');
 		$domain = preg_replace('#^https?://#', '', $raw_domain);
     	$Parser = new WhoisParser('array'); 
     	$result = $Parser->lookup($domain);
+
+        //ip address
     	$ipv4=gethostbynamel($domain);
+
+        //ip location
+        $client = new Client(); //GuzzleHttp\Client
+        $query_string="http://freegeoip.net/json/".$domain;
+        $iplocation = $client->post($query_string);
+
         
         $technologies=[];
         $meta_tags=get_meta_tags($raw_domain);
@@ -69,6 +79,7 @@ class DetectController extends Controller
             }
             return false;   
         }
+
         if(url_exists($url) && has_wp_content($raw_domain)){
             $cms=array('name'=>"Wordpress",'version'=>"Unknown");   
             if (isset($meta_tags['generator']) && preg_match("/^wordpress/i", $meta_tags['generator'])) {
@@ -125,7 +136,7 @@ class DetectController extends Controller
             }
         }
         store($raw_domain);
-        return view('result',compact('domain','result','server_info', 'ipv4','technologies'));
+        return view('result',compact('domain','result','server_info', 'ipv4','technologies','iplocation'));
     	
     }
 
