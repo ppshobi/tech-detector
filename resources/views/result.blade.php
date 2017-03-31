@@ -19,11 +19,21 @@
             
             <table class="table">
                 <tr>
-                    <td>Ip Address</td>
+                    <td>IP Address</td>
                     <td>
                         @foreach((array)$ipv4 as $ip)
                         {{$ip}}<br/>
                         @endforeach
+                    </td>
+                </tr>
+                <tr>
+                    <td>IP Location</td>
+                    <td>
+                        <span style="font-weight: bold">Country -</span> {{$iplocation->country_name}} <br/>
+                        <span style="font-weight: bold">Region - </span>{{$iplocation->region_name}}<br/>
+                        <span style="font-weight: bold"> City - </span>{{$iplocation->city}}<br/>
+                        <span style="font-weight: bold">Latitude -</span> {{$iplocation->latitude}}<br/>
+                        <span style="font-weight: bold">Longitude - </span>{{$iplocation->longitude}}<br/>
                     </td>
                 </tr>
                 <tr>

@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <a href="/"><li class="list-group-item"> Fingerprint new Website</li></a>
-                        <a href="/recent_searches"><li class="list-group-item"> Saved Data</li></a>
+                        <a href="/recent_searches"><li class="list-group-item"> Previous Searches</li></a>
                     </ul>
                 </div>
             </div>

@@ -31,7 +31,7 @@ class DetectController extends Controller
         //ip location
         $client = new Client(); //GuzzleHttp\Client
         $query_string="http://freegeoip.net/json/".$domain;
-        $iplocation = $client->post($query_string);
+        $iplocation = json_decode((string)$client->get($query_string)->getBody());
 
         
         $technologies=[];
