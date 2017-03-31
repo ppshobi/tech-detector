@@ -6,9 +6,9 @@
         <div class="col-md-8 col-md-offset-2" id="print">
             <h2>Your Recent Searches</h2>
             <table class="table">
-                @foreach((array)recent_searches as $serach)
+                @foreach((array)$recent_searches as $search)
                 <tr>
-                    <td>{{$search['url']}}</td>
+                    <td>{{var_dump($search)}}</td>
                 </tr>
                 @endforeach
             </table>
