@@ -6,9 +6,10 @@
         <div class="col-md-8 col-md-offset-2" id="print">
             <h2>Your Recent Searches</h2>
             <table class="table">
-                @foreach((array)$recent_searches as $search)
+
+                @foreach($recent_searches as $search)
                 <tr>
-                    <td>{{var_dump($search)}}</td>
+                    <td class="list-group-item">{{$search->url}}</td>
                 </tr>
                 @endforeach
             </table>
