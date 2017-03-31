@@ -22,6 +22,7 @@ Route::get('/detect', function () {
 Route::get('/print', function () {
     return view('print');
 });
+Route::get('/recent_searches', 'SearchController@index');
 
 Auth::routes();
 
