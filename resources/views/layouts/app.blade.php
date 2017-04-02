@@ -87,7 +87,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    <script src="/js/wappalyzer.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/printThis.js"></script>
     <script type="text/javascript">

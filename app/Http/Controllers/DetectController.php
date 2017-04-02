@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -28,19 +27,20 @@ class DetectController extends Controller
     	$result = $Parser->lookup($domain);
 
         //ip address
-    	$ipv4=gethostbynamel($domain);
+    	$ipv4 = gethostbynamel($domain);
 
         //ip location
         $client = new Client(); //GuzzleHttp\Client
-        $query_string="http://freegeoip.net/json/".$domain;
+        $query_string = "http://freegeoip.net/json/".$domain;
         $iplocation = json_decode((string)$client->get($query_string)->getBody());
+        $node_cmd = "node js/wappalyzer.js ". $raw_domain;
 
-        $process = new Process("node js/wappalyzer.js". $raw_domain);
+        //dd($node_cmd);
+        $process = new Process($node_cmd);
         $process->run(); // to run Sync
-        $tech=$process->getOutput();
-        $tech=strstr($tech,'{"url"');
-        $technologies=json_decode($tech)
-
+        $tech = $process->getOutput();
+        $tech = strstr($tech,'{"url"');
+        $technologies = json_decode($tech,true);
 
         function store($raw_domain){
             if (Auth::check()){
@@ -53,13 +53,9 @@ class DetectController extends Controller
             }
         }
 
-       
-
         store($raw_domain);
-
-        return view('result',compact('domain','result', 'ipv4','technologies','iplocation'));
-    	
+        //dd($technologies);
+        return view('result',compact('domain','result', 'ipv4','technologies','iplocation'));	
     }
-
    
 }

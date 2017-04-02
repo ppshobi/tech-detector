@@ -42,49 +42,15 @@
                         {{ $nameserver }}<br/>
                         @endforeach
                     </td>
-                </tr>               
-                <tr>
-                    <td>Content Management System</td>
-                    <td>
-                        @if($technologies['cms'])
-                            {{ $technologies['cms']['name'] }} {{", version = " . $technologies['cms']['version'] }}
-                        @else
-                            "<b>HTML, XHTML</b>"
-                        @endif
+                </tr>      
 
-                    </td>
-                </tr>
-                <tr>
-                    <td>Server Information</td>
-                    <td>
-                    
-                        @if($server_info['server'])
-                            @foreach((array)$server_info['server'] as $server)
-                                {{$server}}<br/>
-                            @endforeach
-                        @else
-                            "<b>Sever Info Was Not Avilable</b>"
-                        @endif
-
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td>
-                        Powered By
-                    </td>
-                    <td>
-                        @if($server_info['poweredby'])
-                            {{ $server_info['poweredby'] }}
-                        @else
-                            {{ $technologies['programming_language'] }}
-                        @endif
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{ dd(json_decode(json_encode(shell_exec('node js/wappalyzer.js http://shobi.in'))))}}</td>
-                </tr>
+                @foreach($technologies['applications'] as $technology)
+                    <tr>
+                        <td> {{ $technology['categories'][0] }} </td>
+                        <td> {{ $technology['name'] }} <img src="https://github.com/AliasIO/Wappalyzer/tree/master/src/icons/{{$technology['icon']}}"> </td>
+                        <td> {{ $technology['version'] }} </td>
+                    </tr>
+                @endforeach 
             </table>
         </div>
         <div class="col-md-8 col-md-offset-2">
