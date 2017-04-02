@@ -13,6 +13,8 @@ use Sunra\PhpSimple\HtmlDomParser;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
+use Symfony\Component\Process\Process;
+
 class DetectController extends Controller
 {
     public function index(Request $request){
@@ -22,7 +24,7 @@ class DetectController extends Controller
 
     	$raw_domain = $request->input('domain');
 		$domain = preg_replace('#^https?://#', '', $raw_domain);
-    	$Parser = new WhoisParser('array'); 
+    	$Parser = new WhoisParser('array');
     	$result = $Parser->lookup($domain);
 
         //ip address
@@ -33,99 +35,14 @@ class DetectController extends Controller
         $query_string="http://freegeoip.net/json/".$domain;
         $iplocation = json_decode((string)$client->get($query_string)->getBody());
 
-        
-        $technologies=[];
-        $meta_tags=get_meta_tags($raw_domain);
-        //dd($meta_tags);
-        function url_exists($url) {
-            $handle = curl_init($url);
-            curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
-
-            $response = curl_exec($handle);
-            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-
-            if($httpCode >= 200 && $httpCode <= 400) {
-                return true;
-            } else {
-                return false;
-            }
-
-            curl_close($handle);
-        }
-        $url=$domain;
-        $url=$url."/wp-admin";
+        $process = new Process("node js/wappalyzer.js". $raw_domain);
+        $process->run(); // to run Sync
+        $tech=$process->getOutput();
+        $tech=strstr($tech,'{"url"');
+        $technologies=json_decode($tech)
 
 
-        //version detection from string
-        function get_version($ver_string){
-            if (preg_match('/\d+(?:\.\d+)+/', $ver_string, $matches)) { 
-                return $matches[0]; //returning the first match 
-
-            }else{
-                return "Unknown";
-            }
-        }
-        //cms detection
-        // ==================
-        function has_wp_content($raw_domain){
-            //finding an image url to see wp-content exists
-            $dom = HtmlDomParser::file_get_html($raw_domain);
-            $img_url = $dom->find('img',1)->src;
-            $img_url=(array)explode('/', $img_url); 
-            foreach ($img_url as $urls) {
-                if ($urls=="wp-content") {
-                    return true;
-                }
-            }
-            return false;   
-        }
-
-        if(url_exists($url) && has_wp_content($raw_domain)){
-            $cms=array('name'=>"Wordpress",'version'=>"Unknown");   
-            if (isset($meta_tags['generator']) && preg_match("/^wordpress/i", $meta_tags['generator'])) {
-                $cms['version']=get_version($meta_tags['generator']);
-            }
-            $technologies['cms']=$cms;
-            $technologies['programming_language']="PHP";
-
-
-        }elseif (isset($meta_tags['generator']) && preg_match("/^drupal/i", $meta_tags['generator'])) {
-                //drupal
-                $cms=array('name'=>"Drupal",'version'=>"Unknown");
-                $cms['version']=get_version($meta_tags['generator']);
-                $technologies['cms']=$cms;
-                $technologies['programming_language']="PHP";
-        }
-        else{
-            $cms = array('name' => "Unknown", 'version'=> "Unknown");
-            $technologies['cms']=$cms;
-        }
-        
-        //server information
-        // =====================
-        $headers = get_headers($raw_domain,1);
-       
-        
-        if (isset($headers['Server'])) {
-             $server_info['server']=$headers['Server'];
-        }else{
-            $server_info['server']='';
-        }
-
-        if (isset($headers['X-Powered-By'])) {
-            $server_info['poweredby']=$headers['X-Powered-By'];
-        }else{
-            $server_info['poweredby']='';
-        }
-        
-
-        //programming language
-        if (!isset($technologies['programming_language'])) {
-            $technologies['programming_language']="HTML, Javascript, Css";
-        }
-
-
-        function store($url){
+        function store($raw_domain){
             if (Auth::check()){
                 //if user is logged in then store the url in db,
                 $search=new UserSearch();
@@ -135,8 +52,12 @@ class DetectController extends Controller
                 $search->save();
             }
         }
+
+       
+
         store($raw_domain);
-        return view('result',compact('domain','result','server_info', 'ipv4','technologies','iplocation'));
+
+        return view('result',compact('domain','result', 'ipv4','technologies','iplocation'));
     	
     }
 

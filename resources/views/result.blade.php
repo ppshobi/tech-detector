@@ -82,6 +82,9 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td>{{ dd(json_decode(json_encode(shell_exec('node js/wappalyzer.js http://shobi.in'))))}}</td>
+                </tr>
             </table>
         </div>
         <div class="col-md-8 col-md-offset-2">
