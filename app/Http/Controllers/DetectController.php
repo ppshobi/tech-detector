@@ -60,6 +60,7 @@ class DetectController extends Controller
 
     public function test(){
         $process=new Process("ls -la");
+        $process->run();
         dd($process->getOutput());
     }
    
