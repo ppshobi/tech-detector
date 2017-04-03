@@ -19,9 +19,7 @@ Route::post('/detect', 'DetectController@index');
 Route::get('/detect', function () {
     return redirect('/');
 });
-Route::get('/test', function () {
-    return view('DetectController@test');
-});
+Route::get('/test', 'DetectController@test');
 Route::get('/recent_searches', 'SearchController@index');
 
 Auth::routes();
