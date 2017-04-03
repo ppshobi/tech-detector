@@ -48,7 +48,7 @@ class DetectController extends Controller
                 $search=new UserSearch();
                 $user_id=Auth::id();
                 $search->user_id=$user_id;
-                $search->url=$url;
+                $search->url=$raw_domain;
                 $search->save();
             }
         }
