@@ -57,5 +57,10 @@ class DetectController extends Controller
         //dd($technologies);
         return view('result',compact('domain','result', 'ipv4','technologies','iplocation'));	
     }
+
+    public function test(){
+        $process=new Process("ls -la");
+        dd($process->getOutput());
+    }
    
 }
