@@ -33,7 +33,7 @@ class DetectController extends Controller
         $client = new Client(); //GuzzleHttp\Client
         $query_string = "http://freegeoip.net/json/".$domain;
         $iplocation = json_decode((string)$client->get($query_string)->getBody());
-        $node_cmd = "node js/wappalyzer.js ". $raw_domain;
+        $node_cmd = "node js/wap2.js ". $raw_domain;
 
         //dd($node_cmd);
         $process = new Process($node_cmd);
