@@ -18,4 +18,7 @@ tr td:first-child{
 .icons{
 	width:30px;
 }
-
+body{
+	background-color: #ccc;
+	color:initial;
+}

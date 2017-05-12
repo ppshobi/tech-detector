@@ -44,7 +44,7 @@
                     </td>
                 </tr>      
 
-                @foreach($technologies['applications'] as $technology)
+                @foreach((array)$technologies['applications'] as $technology)
                     <tr>
                         <td> {{ $technology['categories'][0] }} </td>
                         <td> {{ $technology['name'] }} <img class="icons" src="images/icons/{{$technology['icon']}}"> </td>
