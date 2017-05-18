@@ -1,5 +1,5 @@
 
-## About Techdetector
+# About Techdetector
 
 This a web fingerprinting application, it detects back end technologies of a given domain by using the node module `wappalyzer`. And the app also finds the *whois* information and *geoip location* by using freegeoip. You can also print the report if you want to.
 
@@ -12,7 +12,7 @@ The Application can also find the IP address used by the domain name, Also track
 1. Find Whois Information
 2. Find IP Geolocation
 3. Find the applications, frameworks, and other technologies used.
-4. Print Generatd Report
+4. Print Generated Report
 
 # Courtesy
 *I am highly indebted to the following people/tools for which they made it possible for me to build this tool.*
@@ -23,13 +23,17 @@ The Application can also find the IP address used by the domain name, Also track
 4. [Jomit Jose](https://github.com/jomoos) - Without him, I am just another  [real world programmer](http://imgur.com/a/SohjD)
 
 # Installation
+
 **clone this repo**
+`git clone https://github.com/ppshobi/tech-detector.git`
+
+**install dependencies**
 
 `composer update`
 
 cd into repo
 
-**generate artisan key**
+**Generate artisan key**
 
 `php artisan generate:key`
 
@@ -37,7 +41,8 @@ cd into repo
 
 `php artisan clear:cache`
 
-**Install laravel npm dependencies**
+**Install Node modules**
+
 `npm install`
 
 **Run Laravel**
