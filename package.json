@@ -17,5 +17,8 @@
   },
   "dependencies": {
     "wappalyzer": "^3.0.10"
+  },
+  "engines": {
+    "node": "7.8.0"
   }
 }
