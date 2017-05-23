@@ -22,7 +22,8 @@ class DetectController extends Controller
     	]);
 
     	$raw_domain = $request->input('domain');
-		$domain = preg_replace('#^https?://#', '', $raw_domain);
+        $domain = preg_replace('#^https?://#', '', $raw_domain);
+		$domain = rtrim($domain, '/');
     	$Parser = new WhoisParser('array');
     	$result = $Parser->lookup($domain);
 
