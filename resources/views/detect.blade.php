@@ -14,7 +14,7 @@
                             <label for="domain" class="col-md-4 control-label">Enter Domain Name</label>
 
                             <div class="col-md-6">
-                                <input id="domain" type="domain" class="form-control" name="domain" value="{{ old('domain') }}" required autofocus>
+                                <input id="domain" placeholder="eg: http://google.com" type="domain" class="form-control" name="domain" value="{{ old('domain') }}" required autofocus>
 
                                 @if ($errors->has('domain'))
                                     <span class="help-block">
