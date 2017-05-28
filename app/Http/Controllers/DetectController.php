@@ -60,7 +60,7 @@ class DetectController extends Controller
     }
 
     public function test(){
-        $process=new Process("node js/wappalyzer.js http://google.com");
+        $process=new Process("node js/wap2.js http://google.com");
         $process->run();
         dd($process->getOutput());
     }
