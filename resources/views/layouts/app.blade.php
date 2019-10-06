@@ -71,6 +71,11 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+
+                                    <li>
+                                        <a href="/recent_searches">Recent Searches</a>
+                                    </li>
+
                                     <li>
                                         <a href="{{ url('/home') }}" > Home </a> 
                                     </li>

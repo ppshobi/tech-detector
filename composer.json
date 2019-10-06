@@ -11,7 +11,7 @@
         "laravelcollective/html": "^5.2.0",
         "sunra/php-simple-html-dom-parser": "^1.5",
         "uxweb/sweet-alert": "^1.4",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
