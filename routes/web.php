@@ -13,16 +13,15 @@
 
 Route::get('/', function () {
     return view('detect');
-});
+})->middleware('auth');
 
 Route::post('/detect', 'DetectController@index');
+
 Route::get('/detect', function () {
     return redirect('/');
 });
-Route::get('/test', 'DetectController@test');
-Route::get('/recent_searches', 'SearchController@index');
 
-Auth::routes();
+Route::get('/recent_searches', 'SearchController@index');
 
 Route::get('/admin', 'HomeController@index');
 

@@ -9,3 +9,18 @@ wappalyzer.run([process.argv.slice(2), '--resource-timeout=10000'], function(std
     process.stderr.write(stderr);
   }
 });
+
+
+
+            
+            
+                             
+{
+                                    
+}
+                                                        
+
+ {
+    
+}
+                                                        
